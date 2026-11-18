@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CARBONCUT | Carbon Footprint Tracking & Purposeful UI Animations</title>
+  <link rel="stylesheet" href="carboncut_kinetic_motion.css" />
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header class="cc-nav-bar">
+    <div class="cc-container cc-nav-flex">
+      <a href="#motion-stage" class="cc-logo">
+        <span class="cc-live-beacon"></span> CARBONCUT
+      </a>
+      <nav class="cc-nav-links" aria-label="Primary Navigation">
+        <a href="#motion-stage">Animation Event Lab</a>
+        <a href="#reduction-services">Reduction Services</a>
+        <a href="#footprint-calc">Footprint Estimator</a>
+        <a href="#crud-checklist">Action Checklist</a>
+        <a href="#ui-theory">UI Animation Theory</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Practicum Core: CSS Keyframe Animation & Animation Events Stage (Matching Practicum Diagram) -->
+  <section id="motion-stage" class="cc-hero-lab">
+    <div class="cc-container">
+      <div class="cc-lab-card">
+        <div class="cc-lab-topbar">
+          <span>CARBONCUT &mdash; Purposeful UI Motion &amp; Lifecycle Telemetry</span>
+          <button type="button" class="cc-play-btn" onclick="replayTelemetryAnimation()">
+            &#9654; Play Animation Cycle
+          </button>
+        </div>
+
+        <div class="cc-lab-body">
+          <!-- Animated H1 Element matching the Practicum Diagram ("Watch me move" / Net-Zero Glide) -->
+          <div class="cc-track-lane">
+            <h1 id="animatedHeadline" class="cc-glide-heading">
+              CARBONCUT: Watch Emissions Drop
+            </h1>
+          </div>
+
+          <p class="cc-lab-lead">
+            This interactive dashboard demonstrates purposeful <strong>CSS Animations</strong>
+            (<code>@keyframes</code>) to guide user focus across carbon reduction milestones,
+            while logging live JavaScript <code>animationstart</code>, <code>animationiteration</code>,
+            and <code>animationend</code> events in real time.
+          </p>
+
+          <!-- Live Animation Event Output Log (Matches the diagram's event list) -->
+          <div class="cc-event-console">
+            <div class="cc-console-head">
+              <strong>Live CSS Animation Event Telemetry Log</strong>
+              <span id="cycleBadge" class="cc-cycle-pill">Running 3-Loop Cycle (3s / loop)</span>
+            </div>
+            <ul id="animationEventLog" class="cc-event-ul" aria-live="polite"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Purposeful Hover & Scale Feedback Cards: Carbon Reduction Services -->
+  <section id="reduction-services" class="cc-section">
+    <div class="cc-container">
+      <div class="cc-sec-head">
+        <h2>Carbon Reduction Services with Tactile UI Feedback</h2>
+        <p>Subtle hover elevation and color transitions signal interactivity without causing cognitive overload.</p>
+      </div>
+
+      <div class="cc-services-grid">
+        <article class="cc-service-card">
+          <div class="cc-card-icon">01</div>
+          <h3>Scope 1–3 Footprint Tracking</h3>
+          <p>Automated energy, fleet, and supply-chain emissions ingestion with real-time intensity alerts.</p>
+          <span class="cc-card-metric">-32% Avg. Reporting Lag</span>
+        </article>
+
+        <article class="cc-service-card">
+          <div class="cc-card-icon">02</div>
+          <h3>Clean Energy PPA Transition</h3>
+          <p>Direct rooftop solar and utility green-tariff migration cutting Scope 2 electricity carbon up to 68%.</p>
+          <span class="cc-card-metric">-68% Scope 2 Output</span>
+        </article>
+
+        <article class="cc-service-card">
+          <div class="cc-card-icon">03</div>
+          <h3>Verified Reforestation Offsets</h3>
+          <p>Satellite-monitored mangrove and native forest carbon sinks with serialized retirement ledgers.</p>
+          <span class="cc-card-metric">100% ISO-14064 Audited</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Carbon Footprint Calculator -->
+  <section id="footprint-calc" class="cc-section cc-tinted">
+    <div class="cc-container">
+      <div class="cc-sec-head">
+        <h2>Interactive Carbon Footprint Calculator</h2>
+        <p>Adjust monthly consumption to calculate emissions and trigger an animated feedback transition.</p>
+      </div>
+
+      <div class="cc-calc-box">
+        <div class="cc-calc-inputs">
+          <div class="cc-field">
+            <label for="elecRange">Monthly Electricity Usage: <strong id="elecText">280</strong> kWh</label>
+            <input type="range" id="elecRange" min="50" max="1500" value="280" oninput="updateEmissions()" />
+          </div>
+          <div class="cc-field">
+            <label for="travelRange">Weekly Commute / Fleet Distance: <strong id="travelText">120</strong> km</label>
+            <input type="range" id="travelRange" min="0" max="1000" value="120" oninput="updateEmissions()" />
+          </div>
+          <div class="cc-field">
+            <label for="dietSelect">Operations &amp; Diet Profile</label>
+            <select id="dietSelect" onchange="updateEmissions()">
+              <option value="115">Plant-Based / Low-Carbon (115 kg CO₂e/mo)</option>
+              <option value="170" selected>Vegetarian Balanced (170 kg CO₂e/mo)</option>
+              <option value="250">Standard Mixed (250 kg CO₂e/mo)</option>
+              <option value="340">High-Intensity Cold Chain (340 kg CO₂e/mo)</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="resultPanel" class="cc-calc-result">
+          <span class="cc-res-label">MONTHLY CARBON FOOTPRINT</span>
+          <div class="cc-res-number"><span id="monthlyOut">481</span> <small>kg CO₂e</small></div>
+          <p>Annual Projection: <strong id="annualOut">5.77</strong> tonnes CO₂e / year</p>
+          <div id="statusBanner" class="cc-status-banner">Moderate — 21% cut achievable via Clean Energy PPA</div>
+          <button type="button" class="cc-btn cc-btn-primary cc-full-btn" onclick="pushOffsetTask()">
+            + Add Offset Milestone to Checklist
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CRUD Action Checklist (Input box, Add button onclick, CRUD array of tasks) -->
+  <section id="crud-checklist" class="cc-section">
+    <div class="cc-container">
+      <div class="cc-sec-head">
+        <h2>Carbon Reduction CRUD Action Checklist</h2>
+        <p>Create, read, update, and delete reduction milestones backed by a live JavaScript task array.</p>
+      </div>
+
+      <div class="cc-crud-box">
+        <div class="cc-input-row">
+          <input
+            type="text"
+            id="taskInput"
+            placeholder="Add a carbon reduction milestone (e.g., Switch office lighting to LEDs)..."
+            aria-label="Carbon reduction task"
+          />
+          <button type="button" class="cc-btn cc-btn-primary" onclick="addTask()">Add Task</button>
+        </div>
+
+        <div class="cc-crud-bar">
+          <span id="taskCountLabel">0 tasks tracked</span>
+          <button type="button" class="cc-link-btn" onclick="resetSampleTasks()">Restore Sample Milestones</button>
+        </div>
+
+        <ul id="crudTaskUl" class="cc-task-ul"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Minimum Underpinning Theory -->
+  <section id="ui-theory" class="cc-section cc-tinted">
+    <div class="cc-container">
+      <div class="cc-sec-head">
+        <h2>Minimum Underpinning Theory: Purposeful UI Animations</h2>
+        <p>Balancing visual hierarchy, user guidance, and accessibility without cognitive overload.</p>
+      </div>
+
+      <div class="cc-theory-card">
+        <p>
+          Selecting which UI components to animate is grounded in <strong>visual hierarchy</strong>,
+          <strong>user guidance</strong>, and <strong>immediate feedback</strong>. Subtle scale and color transitions
+          on buttons and service cards confirm interactivity, while animated state updates direct attention to
+          newly added carbon reduction milestones. At the same time, animations remain purposeful, lightweight,
+          and respect <code>@media (prefers-reduced-motion: reduce)</code> so low-end devices and motion-sensitive
+          users experience smooth, accessible navigation.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="cc-footer">
+    <div class="cc-container cc-footer-flex">
+      <span><strong>CARBONCUT</strong> &mdash; Carbon Footprint Tracking &amp; Reduction Services</span>
+      <span>&copy; 2026 CARBONCUT &bull; GitHub &amp; Vercel Ready</span>
+    </div>
+  </footer>
+
+  <script src="carboncut_animation_crud.js"></script>
+</body>
+</html>
